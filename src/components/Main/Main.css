@@ -1,0 +1,32 @@
+.main__greeting {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  font-family: "Inter-Regular";
+  gap: 0px;
+}
+
+.main__greeting-p {
+  margin: 1px auto;
+}
+
+.card__section {
+  margin-top: 40px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Inter-Bold";
+}
+
+.card__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 34px;
+}
+
+@media screen and (max-width: 640px) {
+  .main__greeting {
+    display: none;
+  }
+}

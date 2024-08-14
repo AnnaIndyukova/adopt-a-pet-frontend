@@ -1,0 +1,4 @@
+.newsCard {
+  display: flex;
+  flex-direction: column;
+}

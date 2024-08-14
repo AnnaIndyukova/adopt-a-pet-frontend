@@ -194,7 +194,7 @@ function App() {
       .catch(console.error);
   };
 
-  //  Modal windows manage
+  //  Modal windows
   const handleLogInButton = () => {
     setActiveModal("login");
   };

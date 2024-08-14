@@ -41,7 +41,7 @@ const ModalWithForm = ({
             <button className="modal__submit-button" type="submit">
               {buttonText}
             </button>
-            {addOn}
+            <div className="modal__submit-addOn-text">{addOn}</div>
           </div>
         </form>
       </div>

@@ -1,3 +1,7 @@
+.main {
+  padding: 10px 0 0;
+}
+
 .main__greeting {
   display: flex;
   flex-direction: column;

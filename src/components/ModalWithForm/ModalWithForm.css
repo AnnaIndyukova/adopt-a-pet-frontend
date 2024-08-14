@@ -39,6 +39,7 @@
   position: absolute;
   top: 24px;
   right: 24px;
+  cursor: pointer;
 }
 
 .modal__form {
@@ -80,6 +81,7 @@
 
 .modal__radio-input {
   margin-top: 8px;
+  cursor: pointer;
 }
 
 .modal__radio-input:checked ~ span {
@@ -91,6 +93,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  cursor: pointer;
 }
 
 .modal__submit-button {
@@ -101,7 +104,7 @@
   background-color: #8cace5;
   color: #fff;
   font-weight: 500;
-  transition: ease-in 0.5s;
+  transition: ease-in 0.3s;
   cursor: pointer;
 }
 
@@ -113,9 +116,13 @@
   border-width: 0;
   padding: 0;
   background-color: #fff;
-  color: #2f71e5;
+  color: #8cace5;
   font-weight: 500;
   cursor: pointer;
+}
+
+.modal__button-text:hover {
+  color: #2f71e5;
 }
 
 .modal__form-error-text {

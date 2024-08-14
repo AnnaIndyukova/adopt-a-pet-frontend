@@ -37,8 +37,8 @@ const Header = ({ handleSignUpButton, handleSearchButton }) => {
       className={`header ${isMobileMenuOpened ? "header__mobile-opened" : ""}`}
     >
       <div className="header__logo">
-        <Link to="/">
-          <img src={logoSrc} alt="logo" />
+        <Link className="header__logo_link" to="/">
+          <img className="header__logo_img" src={logoSrc} alt="logo" />
         </Link>
       </div>
 
@@ -57,7 +57,11 @@ const Header = ({ handleSignUpButton, handleSearchButton }) => {
           Find a Friend
         </button>
 
-        <Link to="/news" style={{ textDecoration: "none" }}>
+        <Link
+          className="header__link"
+          to="/news"
+          style={{ textDecoration: "none" }}
+        >
           <p className="header__tab" onClick={toggleMobileMenu}>
             News
           </p>

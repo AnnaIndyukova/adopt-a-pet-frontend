@@ -150,6 +150,10 @@
   color: #e52f2f;
 }
 
+.modal__form-textarea {
+  padding: 24px 24px;
+}
+
 @media screen and (max-width: 640px) {
   .modal__content {
     padding: 20px;

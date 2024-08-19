@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { getCoordinates } from "../../utils/geocodingApi";
-import { openCageGeocodingAPIKey } from "../../utils/constants";
+import CityInput from "../CityInput/CityInput";
 
 const RegisterModal = ({
   handleRegisterSubmit,
@@ -9,8 +8,6 @@ const RegisterModal = ({
   onCloseModal,
   buttonText,
 }) => {
-  const [multiChoice, setMultiChoice] = useState(false);
-  const [options, setOptions] = useState([]);
   const [error, setError] = useState("");
   const [data, setData] = useState({
     userType: "",
@@ -30,6 +27,20 @@ const RegisterModal = ({
     }));
   };
 
+  const handleCityChange = (city) => {
+    setData((prevData) => ({
+      ...prevData,
+      city: city,
+    }));
+  };
+
+  const handleCoordinatesChange = (coordinates) => {
+    setData((prevData) => ({
+      ...prevData,
+      coordinates: coordinates,
+    }));
+  };
+
   useEffect(() => {
     if (data.password !== data.confirmPassword) {
       setError("Passwords do not match");
@@ -41,64 +52,8 @@ const RegisterModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!error) {
-      if (data.coordinates) {
-        handleRegisterSubmit(data);
-      } else {
-        handleCityChange(data.city).then((coordinates) => {
-          if (coordinates) {
-            handleRegisterSubmit({ ...data, coordinates });
-          } else {
-            console.log("Failed to get coordinates");
-          }
-        });
-      }
+      handleRegisterSubmit(data);
     }
-  };
-
-  // work with geo location
-  const handleCityChange = (city) => {
-    return getCoordinates(city, openCageGeocodingAPIKey)
-      .then((data) => {
-        if (data.results.length === 1) {
-          return data.results[0].geometry;
-        } else if (data.results.length > 1) {
-          const uniqueOptions = [
-            ...new Set(data.results.map((option) => option.formatted)),
-          ];
-          setOptions(uniqueOptions);
-          if (uniqueOptions.length > 1) {
-            setMultiChoice(true);
-          } else {
-            setMultiChoice(false);
-            return data.results[0].geometry;
-          }
-        } else {
-          setOptions(["No options found, please check the spelling"]);
-          setMultiChoice(true);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const handleChoice = (e) => {
-    const city = e.target.textContent;
-    getCoordinates(city, openCageGeocodingAPIKey)
-      .then((data) => {
-        const coordinates = data.results[0].geometry;
-        setData((prevData) => ({
-          ...prevData,
-          city: city,
-          coordinates: coordinates,
-        }));
-      })
-      .then(() => {
-        setMultiChoice(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   };
 
   return (
@@ -153,6 +108,7 @@ const RegisterModal = ({
         <input
           className="modal__form-input"
           type="text"
+          id="name"
           minLength={1}
           maxLength={30}
           name="name"
@@ -165,42 +121,17 @@ const RegisterModal = ({
           className="modal__form-input"
           type="email"
           name="email"
+          id="email"
           placeholder="Email"
           value={data.email}
           onChange={handleChange}
           required
         />
-
-        <input
-          className="modal__form-input"
-          type="text"
-          id="city"
-          name="city"
-          placeholder="City"
-          value={data.city}
-          onChange={handleChange}
-          minLength={2}
+        <CityInput
+          onCityChange={handleCityChange}
+          onCoordinatesChange={handleCoordinatesChange}
+          currentCityValue=""
         />
-
-        {multiChoice && (
-          <ul className="modal__form-city-options">
-            <h3 className="modal__form-title">Specify your city:</h3>
-            {options[0].includes("No options found") ? (
-              <p className="modal__form-city-option-warning">{options[0]}</p>
-            ) : (
-              options.map((option, index) => (
-                <p
-                  key={index}
-                  onClick={handleChoice}
-                  className="modal__form-city-option-item"
-                >
-                  {option}
-                </p>
-              ))
-            )}
-          </ul>
-        )}
-
         <input
           className="modal__form-input"
           type="password"

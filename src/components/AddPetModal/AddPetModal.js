@@ -40,6 +40,7 @@ const AddPetModal = ({ handleAddPetSubmit, onCloseModal, buttonText }) => {
           placeholder="Pet ID"
           value={data.petID}
           onChange={handleChange}
+          required
         />
 
         <select
@@ -86,6 +87,7 @@ const AddPetModal = ({ handleAddPetSubmit, onCloseModal, buttonText }) => {
           placeholder="Image URL"
           value={data.imageUrl}
           onChange={handleChange}
+          required
         />
       </div>
     </ModalWithForm>

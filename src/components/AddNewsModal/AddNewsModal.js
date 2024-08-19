@@ -37,6 +37,7 @@ const AddNewsModal = ({ handleAddNewsSubmit, onCloseModal, buttonText }) => {
           placeholder="Caption"
           value={data.articleCaption}
           onChange={handleChange}
+          required
         />
 
         <textarea
@@ -48,6 +49,7 @@ const AddNewsModal = ({ handleAddNewsSubmit, onCloseModal, buttonText }) => {
           cols="50"
           value={data.articleText}
           onChange={handleChange}
+          required
         />
       </div>
     </ModalWithForm>

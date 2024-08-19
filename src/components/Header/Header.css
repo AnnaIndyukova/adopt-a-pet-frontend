@@ -25,16 +25,15 @@
 
 .header__button {
   border-width: 0;
-  border-radius: 10px;
   background-color: #fff;
   outline: none;
   cursor: pointer;
   transition: transform 0.3s ease;
+  padding: 0;
 }
 
 .header__button:hover {
   transform: scale(1.1);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .header__button_border {
@@ -54,7 +53,7 @@
 }
 
 .header__button_border:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -62,11 +61,6 @@
   display: flex;
   align-items: center;
   gap: 30px;
-}
-
-.header__user {
-  display: flex;
-  align-items: center;
 }
 
 .header__tab {
@@ -79,20 +73,6 @@
 
 .header__tab:hover {
   transform: scale(1.1);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.header__user-avatar {
-  width: 40px;
-  height: 40px;
-  box-sizing: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  object-fit: cover;
-  margin-left: 20px;
 }
 
 .header__menu-mobile-icon {

@@ -11,14 +11,8 @@ const SideBar = ({
   const { currentUser } = useContext(CurrentUserContext);
   return (
     <div className="sideBar">
-      <div className="sideBar__avatar-name">
-        <p className="sideBar__user-avatar">
-          {currentUser.name[0].toUpperCase()}
-        </p>
-        <h3 className="sideBar__name">{currentUser.name}</h3>
-      </div>
-      if (currentUser.userType === "shelter")
-      {
+      <p className="sideBar__name">{currentUser.name}</p>
+      {currentUser.userType === "shelter" ? (
         <>
           <button
             onClick={handleAddPetButton}
@@ -31,24 +25,22 @@ const SideBar = ({
           <button
             onClick={handleAddNewsButton}
             type="button"
-            className="sidebar__button sidebar__button-other"
+            className="sidebar__button"
           >
             Add a news article
           </button>
         </>
-      }
+      ) : (
+        <></>
+      )}
       <button
         onClick={handleEditProfileButton}
         type="button"
-        className="sidebar__button sidebar__button-other"
+        className="sidebar__button"
       >
         Change profile data
       </button>
-      <button
-        onClick={onLogout}
-        type="button"
-        className="sidebar__button sidebar__button-other"
-      >
+      <button onClick={onLogout} type="button" className="sidebar__button">
         Log out
       </button>
     </div>

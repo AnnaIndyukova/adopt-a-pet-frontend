@@ -2,38 +2,22 @@
   display: flex;
   align-items: start;
   flex-direction: column;
-  font-family: "Inter-Bold";
-  font-weight: 700;
-  font-size: 20px;
+  font-family: "Inter-Medium";
+  font-weight: 500;
+  font-size: 18px;
   line-height: 24px;
 }
 
-.sideBar__avatar-name {
-  display: flex;
-  flex-direction: row;
-}
-
 .sideBar__name {
-  margin-left: 16px;
+  font-size: 20px;
   margin-top: 16px;
-  min-width: 345px;
-}
-
-.sideBar__user-avatar {
-  width: 56px;
-  height: 56px;
+  color: #2f71e5;
 }
 
 .sidebar__button {
   border-width: 0;
   background-color: #fff;
   cursor: pointer;
-}
-
-.sidebar__button-top {
-  margin-top: 24px;
-}
-
-.sidebar__button-other {
-  margin-top: 8px;
+  padding: 0;
+  margin-top: 20px;
 }

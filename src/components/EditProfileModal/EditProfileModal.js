@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import CityInput from "../CityInput/CityInput";
 
 const EditProfileModal = ({
   handleChangeProfileSubmit,
@@ -11,6 +12,7 @@ const EditProfileModal = ({
   const [data, setData] = useState({
     name: `${currentUser.name}`,
     city: `${currentUser.city}`,
+    coordinates: `${currentUser.coordinates}`,
   });
 
   const handleChange = (e) => {
@@ -24,6 +26,20 @@ const EditProfileModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     handleChangeProfileSubmit(data);
+  };
+
+  const handleCityChange = (city) => {
+    setData((prevData) => ({
+      ...prevData,
+      city: city,
+    }));
+  };
+
+  const handleCoordinatesChange = (coordinates) => {
+    setData((prevData) => ({
+      ...prevData,
+      coordinates: coordinates,
+    }));
   };
 
   return (
@@ -44,16 +60,10 @@ const EditProfileModal = ({
           value={data.name}
           onChange={handleChange}
         />
-
-        <input
-          className="modal__form-input"
-          type="text"
-          id="city"
-          name="city"
-          placeholder="City"
-          value={data.city}
-          onChange={handleChange}
-          minLength={2}
+        <CityInput
+          onCityChange={handleCityChange}
+          onCoordinatesChange={handleCoordinatesChange}
+          currentCityValue={data.city}
         />
       </div>
     </ModalWithForm>

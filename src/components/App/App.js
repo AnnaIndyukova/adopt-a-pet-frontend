@@ -31,7 +31,7 @@ function App() {
   const [newsArticles, setNewsArticles] = useState([]);
 
   useEffect(() => {
-    // for future - authorization
+    // for future use - authorization
     /*    const token = localStorage.getItem("jwt");
     if (token) {
       auth
@@ -45,7 +45,8 @@ function App() {
   }, []);
 
   const handleLoginSubmit = ({ email, password }) => {
-    const userData = { email, password };
+    handleCloseModal();
+    /* const userData = { email, password };
     setIsLoading(true);
     auth
       .login(userData)
@@ -62,7 +63,7 @@ function App() {
       .catch(console.error)
       .finally(() => {
         setIsLoading(false);
-      });
+      }); */
   };
 
   const handleRegisterSubmit = ({
@@ -74,7 +75,10 @@ function App() {
     coordinates,
   }) => {
     const userData = { userType, name, email, password, city, coordinates };
-    setIsLoading(true);
+    setCurrentUser(userData);
+    setIsLoggedIn(true);
+    handleCloseModal();
+    /* setIsLoading(true);
     auth
       .register(userData)
       .then((res) => {
@@ -84,12 +88,14 @@ function App() {
       .catch(console.error)
       .finally(() => {
         setIsLoading(false);
-      });
+      }); */
   };
 
-  const handleChangeProfileSubmit = ({ name, avatar }) => {
-    const userData = { name, avatar };
-    setIsLoading(true);
+  const handleChangeProfileSubmit = ({ name, city, coordinates }) => {
+    const userData = { name, city, coordinates };
+    setCurrentUser(userData);
+    handleCloseModal();
+    /*  setIsLoading(true);
     auth
       .updateUser(userData)
       .then((res) => {
@@ -99,7 +105,7 @@ function App() {
       .catch(console.error)
       .finally(() => {
         setIsLoading(false);
-      });
+      }); */
   };
 
   const handleLogout = (e) => {
@@ -117,7 +123,8 @@ function App() {
     petStatus,
     imageUrl,
   }) => {
-    const pet = {
+    handleCloseModal();
+    /* const pet = {
       petID,
       animalType,
       petAge,
@@ -135,7 +142,7 @@ function App() {
       .catch(console.error)
       .finally(() => {
         setIsLoading(false);
-      });
+      }); */
   };
 
   const handleEditPetStatusSubmit = () => {};
@@ -145,7 +152,8 @@ function App() {
     articleCaption,
     articleText,
   }) => {
-    const article = { articleDate, articleCaption, articleText };
+    handleCloseModal();
+    /* const article = { articleDate, articleCaption, articleText };
     setIsLoading(true);
     api
       .addNews(article)
@@ -156,7 +164,7 @@ function App() {
       .catch(console.error)
       .finally(() => {
         setIsLoading(false);
-      });
+      }); */
   };
 
   const handleFindPetSubmit = () => {};

@@ -4,16 +4,20 @@ import logoSrc from "../../images/logo.svg";
 import burger from "../../images/burger.svg";
 import closeButton from "../../images/closeButtonGray.svg";
 import { AppContext } from "../../contexts/AppContext";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Link } from "react-router-dom";
 
 const Header = ({ handleSignUpButton, handleSearchButton }) => {
   const { isLoggedIn } = useContext(AppContext);
-  const { currentUser } = useContext(CurrentUserContext);
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpened(!isMobileMenuOpened);
+  };
+
+  const closeMobileMenu = () => {
+    if (isMobileMenuOpened) {
+      toggleMobileMenu();
+    }
   };
 
   const mobileMenuHandler = () => {
@@ -21,14 +25,12 @@ const Header = ({ handleSignUpButton, handleSearchButton }) => {
   };
 
   const SearchButtonHandler = () => {
-    toggleMobileMenu();
+    closeMobileMenu();
     handleSearchButton();
   };
 
   const SignUpButtonHandler = () => {
-    if (isMobileMenuOpened) {
-      toggleMobileMenu();
-    }
+    closeMobileMenu();
     handleSignUpButton();
   };
 
@@ -58,24 +60,25 @@ const Header = ({ handleSignUpButton, handleSearchButton }) => {
         </button>
 
         <Link
-          className="header__link"
           to="/news"
+          className="header__link"
           style={{ textDecoration: "none" }}
         >
-          <p className="header__tab" onClick={toggleMobileMenu}>
+          <p className="header__tab" onClick={closeMobileMenu}>
             News
           </p>
         </Link>
 
         {isLoggedIn ? (
-          <div className="header__user">
-            <Link to="/profile" style={{ textDecoration: "none" }}>
-              <p className="header__tab">My Profile</p>
-              <p className="header__user-avatar">
-                {currentUser.name[0].toUpperCase()}
-              </p>
-            </Link>
-          </div>
+          <Link
+            to="/profile"
+            className="header__link"
+            style={{ textDecoration: "none" }}
+          >
+            <p className="header__tab" onClick={closeMobileMenu}>
+              My profile
+            </p>
+          </Link>
         ) : (
           <button
             className="header__button_border"

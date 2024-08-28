@@ -20,6 +20,8 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import api from "../../utils/api";
 import auth from "../../utils/auth";
+import { defaultPetCards } from "../../utils/constants";
+import { defaultNewsArticles } from "../../utils/constants";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -27,8 +29,8 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [petCards, setPetCards] = useState([]);
-  const [newsArticles, setNewsArticles] = useState([]);
+  const [petCards, setPetCards] = useState(defaultPetCards);
+  const [newsArticles, setNewsArticles] = useState(defaultNewsArticles);
 
   useEffect(() => {
     // for future use - authorization
@@ -46,6 +48,7 @@ function App() {
 
   const handleLoginSubmit = ({ email, password }) => {
     handleCloseModal();
+    /* for future use
     /* const userData = { email, password };
     setIsLoading(true);
     auth
@@ -78,6 +81,7 @@ function App() {
     setCurrentUser(userData);
     setIsLoggedIn(true);
     handleCloseModal();
+    /* for future use
     /* setIsLoading(true);
     auth
       .register(userData)
@@ -95,6 +99,7 @@ function App() {
     const userData = { name, city, coordinates };
     setCurrentUser(userData);
     handleCloseModal();
+    /* for future use
     /*  setIsLoading(true);
     auth
       .updateUser(userData)
@@ -122,17 +127,30 @@ function App() {
     petDescription,
     petStatus,
     imageUrl,
+    shelter,
+    city,
+    coordinates,
+    shelterEmail,
+    likes,
   }) => {
-    handleCloseModal();
-    /* const pet = {
+    const pet = {
       petID,
       animalType,
       petAge,
       petDescription,
       petStatus,
       imageUrl,
+      shelter,
+      city,
+      coordinates,
+      shelterEmail,
+      likes,
+      _id: Math.floor(Math.random() * 100), //temporary
     };
-    setIsLoading(true);
+    setPetCards([pet, ...petCards]);
+    handleCloseModal();
+    /* for future use
+    /*setIsLoading(true);
     api
       .addPet(pet)
       .then((pet) => {
@@ -145,15 +163,39 @@ function App() {
       }); */
   };
 
-  const handleEditPetStatusSubmit = () => {};
+  const handleEditPetStatusSubmit = ({ _id, status }) => {
+    const petData = { _id, status };
+    handleCloseModal();
+    /* for future use
+    /*  setIsLoading(true);
+    api
+      .updatePetStatus(petData)
+      .then((res) => {
+        handleCloseModal();
+      })
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      }); */
+  };
 
   const handleAddNewsSubmit = ({
     articleDate,
     articleCaption,
     articleText,
+    articleAuthor,
   }) => {
+    const article = {
+      articleDate,
+      articleCaption,
+      articleText,
+      articleAuthor,
+      _id: Math.floor(Math.random() * 100), //temporary
+    };
+    setNewsArticles([article, ...newsArticles]);
     handleCloseModal();
-    /* const article = { articleDate, articleCaption, articleText };
+    /* for future use
+    /*
     setIsLoading(true);
     api
       .addNews(article)
@@ -167,10 +209,27 @@ function App() {
       }); */
   };
 
-  const handleFindPetSubmit = () => {};
+  const handleFindPetSubmit = ({ animalType, petAge }) => {
+    setPetCards(defaultPetCards);
+    const newPetList = defaultPetCards.filter((item) => {
+      return (
+        (!animalType || item.animalType === animalType) &&
+        (!petAge || item.petAge === petAge)
+      );
+    });
+    setPetCards(newPetList);
+    handleCloseModal();
+  };
 
-  const handleCardLike = ({ id, isLiked }) => {
-    isLiked
+  const handleClearSearch = () => {
+    setPetCards(defaultPetCards);
+    handleCloseModal();
+  };
+
+  const handleCardLike = ({ id, isLiked, setIsLiked }) => {
+    setIsLiked(!isLiked);
+    /* for future use
+    /*  isLiked
       ? api
           .removeCardLike(id)
           .then((updatedCard) => {
@@ -186,11 +245,17 @@ function App() {
               return petCards.map((c) => (c._id === id ? updatedCard : c));
             });
           })
-          .catch(console.error);
+          .catch(console.error); */
   };
 
   const handleDeleteCard = () => {
-    api
+    const newPetList = petCards.filter((item) => {
+      return item._id !== selectedCard._id;
+    });
+    setPetCards(newPetList);
+    handleCloseModal();
+    /* for future use
+    /* api
       .deleteCard(selectedCard._id)
       .then(() => {
         const newPetList = petCards.filter((item) => {
@@ -199,7 +264,7 @@ function App() {
         setPetCards(newPetList);
         handleCloseModal();
       })
-      .catch(console.error);
+      .catch(console.error); */
   };
 
   //  Modal windows
@@ -255,7 +320,7 @@ function App() {
                 </Route>
                 <ProtectedRoute path="/profile">
                   <Profile
-                    cards={petCards}
+                    cards={defaultPetCards}
                     handleCardClick={handleCardClick}
                     handleCardLike={handleCardLike}
                     onLogout={handleLogout}
@@ -289,7 +354,7 @@ function App() {
             <EditProfileModal
               handleChangeProfileSubmit={handleChangeProfileSubmit}
               onCloseModal={handleCloseModal}
-              buttonText="Save changes"
+              buttonText="Save"
             />
           )}
           {activeModal === "create" && (
@@ -312,6 +377,7 @@ function App() {
               onCloseModal={handleCloseModal}
               selectedCard={selectedCard}
               handleEditPetStatusSubmit={handleEditPetStatusSubmit}
+              buttonText="Save"
             />
           )}
           {activeModal === "search" && (
@@ -319,6 +385,7 @@ function App() {
               handleFindPetSubmit={handleFindPetSubmit}
               onCloseModal={handleCloseModal}
               buttonText="Search"
+              handleClearSearch={handleClearSearch}
             />
           )}
           {activeModal === "createNews" && (

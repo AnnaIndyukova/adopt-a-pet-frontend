@@ -51,13 +51,15 @@ const Header = ({ handleSignUpButton, handleSearchButton }) => {
             : "header__menu_mobile-closed"
         }`}
       >
-        <button
-          className="header__button"
-          type="text"
-          onClick={SearchButtonHandler}
-        >
-          Find a Friend
-        </button>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <button
+            className="header__button"
+            type="text"
+            onClick={SearchButtonHandler}
+          >
+            Find a Friend
+          </button>
+        </Link>
 
         <Link
           to="/news"

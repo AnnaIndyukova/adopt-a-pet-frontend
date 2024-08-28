@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const AddNewsModal = ({ handleAddNewsSubmit, onCloseModal, buttonText }) => {
+  const { currentUser } = useContext(CurrentUserContext);
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const formattedDate = `${day}.${month}.${year}`;
   const [data, setData] = useState({
-    articleDate: "",
+    articleDate: formattedDate,
     articleCaption: "",
     articleText: "",
+    articleAuthor: currentUser.name,
   });
 
   const handleChange = (e) => {

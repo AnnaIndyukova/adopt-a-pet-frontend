@@ -8,6 +8,12 @@ const request = (url, options) => {
   return fetch(url, options).then(handleResponse);
 };
 
+const getPetsList = () => {};
+
+const addPet = () => {};
+
+const updatePetStatus = () => {};
+
 const addCardLike = (id) => {
   const jwt = localStorage.getItem("jwt");
   return request(`${BASE_URL}/pets/${id}/likes`, {
@@ -30,15 +36,20 @@ const removeCardLike = (id) => {
   });
 };
 
+const deleteCard = (id) => {};
+
+const addNews = () => {};
+
 const api = {
   request,
   handleResponse,
-  //addPet,
-  //addNews,
-  //deleteCard,
-  //getPetsList,
+  addPet,
   addCardLike,
   removeCardLike,
+  deleteCard,
+  addNews,
+  getPetsList,
+  updatePetStatus,
 };
 
 export default api;

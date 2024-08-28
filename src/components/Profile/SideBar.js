@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import "./SideBar.css";
+import "./Profile.css";
 
 const SideBar = ({
   handleEditProfileButton,
@@ -40,7 +40,11 @@ const SideBar = ({
       >
         Change profile data
       </button>
-      <button onClick={onLogout} type="button" className="sidebar__button">
+      <button
+        onClick={onLogout}
+        type="button"
+        className="sidebar__button sidebar__button-logout"
+      >
         Log out
       </button>
     </div>

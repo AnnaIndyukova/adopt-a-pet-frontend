@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const AddPetModal = ({ handleAddPetSubmit, onCloseModal, buttonText }) => {
+  const { currentUser } = useContext(CurrentUserContext);
   const [data, setData] = useState({
     petID: "",
     animalType: "",
@@ -9,6 +11,13 @@ const AddPetModal = ({ handleAddPetSubmit, onCloseModal, buttonText }) => {
     petDescription: "",
     petStatus: "available",
     imageUrl: "",
+    // ownerID: currentUser._id,
+    ownerID: "1", //temporary
+    shelter: currentUser.name,
+    city: currentUser.city,
+    coordinates: JSON.stringify(currentUser.coordinates), //temporary
+    shelterEmail: currentUser.email,
+    likes: [],
   });
 
   const handleChange = (e) => {

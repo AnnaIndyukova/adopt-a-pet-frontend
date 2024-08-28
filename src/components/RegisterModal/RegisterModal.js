@@ -64,7 +64,7 @@ const RegisterModal = ({
       onSubmit={handleSubmit}
       buttonText={buttonText}
       addOn=<button
-        className="modal__button-text"
+        className="modal__button-text modal__button-text-invisible"
         type="text"
         onClick={onLogin}
       >

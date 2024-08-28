@@ -93,7 +93,6 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  cursor: pointer;
 }
 
 .modal__submit-button {
@@ -125,6 +124,10 @@
   color: #2f71e5;
 }
 
+.modal__button-text-invisible {
+  visibility: hidden;
+}
+
 .modal__form-error-text {
   color: #e52f2f;
   align-self: flex-start;
@@ -152,6 +155,14 @@
 
 .modal__form-textarea {
   padding: 24px 24px;
+}
+
+.modal__image {
+  width: 100%;
+  height: 400px;
+  border-radius: 16px;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 640px) {

@@ -1,14 +1,7 @@
-.news__caption {
+.news__section {
+  font-size: 20px;
   font-weight: 500;
   font-family: "Inter-Medium";
-  gap: 0px;
-}
-
-.news__section {
-  margin-top: 40px;
-  font-size: 20px;
-  font-weight: 700;
-  font-family: "Inter-Bold";
 }
 
 .news__items {
@@ -16,5 +9,4 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  margin-top: 34px;
 }

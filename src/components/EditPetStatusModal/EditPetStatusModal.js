@@ -32,7 +32,7 @@ const EditPetStatusModal = ({
       buttonText={buttonText}
     >
       <img
-        className="modal__pet-image"
+        className="modal__image"
         src={selectedCard.imageUrl}
         alt={selectedCard.petID}
       />

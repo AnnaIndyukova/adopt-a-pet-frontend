@@ -1,12 +1,14 @@
 import "./NewsCard.css";
 
-const NewsCard = ({ article, key }) => {
+const NewsCard = ({ article }) => {
   return (
     <div className="newsCard">
-      <p className="newsCard__date">{article.date}</p>
-      <p className="newsCard__caption">{article.caption}</p>
-      <p className="newsCard__text">{article.text}</p>
-      <p className="newsCard__author">{article.author}</p>
+      <div className="newsCard__top">
+        <p className="newsCard__caption">{article.articleCaption}</p>
+        <p className="newsCard__date">{article.articleDate}</p>
+      </div>
+      <p className="newsCard__text">{article.articleText}</p>
+      <p className="newsCard__author">{article.articleAuthor}</p>
     </div>
   );
 };

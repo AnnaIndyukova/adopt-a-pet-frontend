@@ -1,9 +1,14 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const SearchModal = ({ handleFindPetSubmit, onCloseModal, buttonText }) => {
+const SearchModal = ({
+  handleFindPetSubmit,
+  onCloseModal,
+  buttonText,
+  handleClearSearch,
+}) => {
   const [data, setData] = useState({
-    animalType: "",
+    animalType: "Dog",
     petAge: "",
   });
 
@@ -26,6 +31,14 @@ const SearchModal = ({ handleFindPetSubmit, onCloseModal, buttonText }) => {
       title="Find a Friend"
       onSubmit={handleSubmit}
       buttonText={buttonText}
+      addOn=<button
+        className="modal__button-text"
+        type="text"
+        onClick={handleClearSearch}
+      >
+        {" "}
+        Clear search
+      </button>
     >
       <div className="modal__form-inputs">
         <select
@@ -36,10 +49,10 @@ const SearchModal = ({ handleFindPetSubmit, onCloseModal, buttonText }) => {
           placeholder="Type of animal"
           value={data.animalType}
         >
-          <option value="dog">Dog</option>
-          <option value="cat">Cat</option>
-          <option value="bird">Bird</option>
-          <option value="other">Other</option>
+          <option value="Dog">Dog</option>
+          <option value="Cat">Cat</option>
+          <option value="Bird">Bird</option>
+          <option value="Other">Other</option>
         </select>
 
         <select
@@ -50,9 +63,10 @@ const SearchModal = ({ handleFindPetSubmit, onCloseModal, buttonText }) => {
           placeholder="Age of the pet"
           value={data.petAge}
         >
-          <option value="junior">Junior</option>
-          <option value="adult">Adult</option>
-          <option value="senior">Senior</option>
+          <option value="">Age doesn't matter</option>
+          <option value="Junior">Junior</option>
+          <option value="Adult">Adult</option>
+          <option value="Senior">Senior</option>
         </select>
       </div>
     </ModalWithForm>

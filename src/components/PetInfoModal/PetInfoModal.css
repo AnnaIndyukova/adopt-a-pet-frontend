@@ -1,0 +1,93 @@
+.modal__content-pet {
+  background-color: #fff;
+  max-width: 498px;
+  height: 620px;
+  width: 100%;
+  border-radius: 16px;
+  position: relative;
+  padding: 0;
+  font-family: "Inter-Medium";
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+}
+
+.modal__city_wrapper {
+  position: absolute;
+  left: 0;
+  top: 465px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.modal__city {
+  border-radius: 5px;
+  padding: 0 10px;
+  background-color: #fff;
+  opacity: 0.7;
+}
+
+.modal__close-button-pet {
+  border-style: none;
+  background: #fff url("../../images/closeButtonGray.svg") center no-repeat;
+  width: 30px;
+  height: 30px;
+  border-radius: 25px;
+  opacity: 0.7;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.modal__pet-image {
+  width: 100%;
+  height: 498px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+p {
+  margin: 0;
+}
+
+.modal__pet-info-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5px 16px;
+}
+.modal__pet-info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.modal__pet-info-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.modal__pet_delete-button {
+  border-width: 0;
+  background-color: #fff;
+  color: #ff4d00;
+}
+
+.modal__pet_delete-button_visible {
+  visibility: visible;
+  cursor: pointer;
+}
+
+.modal__pet_delete-button_hidden {
+  visibility: hidden;
+}
+
+.modal__pet-age {
+  margin-top: 12px;
+}

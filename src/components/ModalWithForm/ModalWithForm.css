@@ -1,0 +1,172 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__content {
+  border-radius: 30px;
+  font-family: "Inter-Medium";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  background-color: #fff;
+  width: 400px;
+  padding: 40px;
+  position: relative;
+}
+
+.modal__title {
+  font-family: "Inter-Bold";
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  margin: 0;
+  text-align: left;
+}
+
+.modal__close-button {
+  border-style: none;
+  background: url("../../images/closeButtonGray.svg");
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  cursor: pointer;
+}
+
+.modal__form {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.modal__form-inputs {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.modal__form-input {
+  height: 60px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #cfcfcf;
+  border-radius: 30px;
+  background-color: transparent;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-top: 20px;
+}
+
+.modal__form-textarea {
+  height: 240px;
+}
+
+.modal__form-radio-header {
+  margin-top: 25px;
+  margin-bottom: 5px;
+}
+
+.modal__radio {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__radio-input {
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.modal__radio-input:checked ~ span {
+  color: black;
+}
+
+.modal__submit-addOn {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.modal__submit-button {
+  border-style: none;
+  width: 129px;
+  height: 60px;
+  border-radius: 30px;
+  background-color: #8cace5;
+  color: #fff;
+  font-weight: 500;
+  transition: ease-in 0.3s;
+  cursor: pointer;
+}
+
+.modal__submit-button:hover {
+  background-color: #2f71e5;
+}
+
+.modal__button-text {
+  border-width: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #8cace5;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.modal__button-text:hover {
+  color: #2f71e5;
+}
+
+.modal__button-text-invisible {
+  visibility: hidden;
+}
+
+.modal__form-error-text {
+  color: #e52f2f;
+  align-self: flex-start;
+  margin: 8px 0 0;
+  height: 20px;
+}
+
+.modal__form-city-options {
+  padding: 0;
+}
+
+.modal__form-city-option-item {
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal__form-city-option-item:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.modal__form-city-option-warning {
+  color: #e52f2f;
+}
+
+.modal__form-textarea {
+  padding: 24px 24px;
+}
+
+.modal__image {
+  width: 100%;
+  height: 400px;
+  border-radius: 16px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 640px) {
+  .modal__content {
+    padding: 20px;
+  }
+}

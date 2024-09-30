@@ -1,0 +1,12 @@
+.footer {
+  font-family: "Inter-Medium";
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.footer__link {
+  color: #000;
+}

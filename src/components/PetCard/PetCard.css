@@ -1,0 +1,77 @@
+.card {
+  position: relative;
+  display: flex;
+  width: 325px;
+  height: 325px;
+}
+
+.card__image {
+  border: solid 1px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.card__city_wrapper {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.card__city {
+  border-radius: 5px;
+  padding: 0 10px;
+  background-color: #fff;
+  font-family: "Inter-Bold";
+  font-weight: 500;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.card__like-button {
+  background: #fff url("../../images/heart.svg") center no-repeat;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  opacity: 0.7;
+}
+
+.card__like-button:hover {
+  opacity: 1;
+}
+
+.card__like-button_liked {
+  background: #fff url("../../images/heart-filled.svg") center no-repeat;
+  cursor: pointer;
+}
+
+.card__like-button_hidden {
+  display: none;
+}
+
+.card__icon-not-available {
+  width: 30px;
+  height: 30px;
+  border-radius: 25px;
+  background-color: rgb(255, 30, 0);
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__icon-not-available_hidden {
+  display: none;
+}

@@ -1,0 +1,36 @@
+.newsCard {
+  margin-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: #b6bcbf 1px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  font-family: "Inter-Medium";
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.newsCard__top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.newsCard__caption {
+  font-family: "Inter-Bold";
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.newsCard__date {
+  color: #b6bcbf;
+}
+.newsCard__text {
+  margin-top: 5px;
+  text-align: left;
+}
+.newsCard__author {
+  font-family: "Inter-Bold";
+  color: #b6bcbf;
+  margin-top: 5px;
+}

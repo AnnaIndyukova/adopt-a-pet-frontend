@@ -1,0 +1,30 @@
+.main {
+  padding: 10px 0 0;
+}
+
+.main__greeting {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  font-family: "Inter-Regular";
+  font-size: 18px;
+  gap: 0px;
+}
+
+.main__greeting-p {
+  margin: 1px auto;
+}
+
+.card__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 640px) {
+  .main__greeting {
+    display: none;
+  }
+}

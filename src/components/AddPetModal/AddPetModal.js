@@ -45,6 +45,7 @@ const AddPetModal = ({ handleAddPetSubmit, onCloseModal, buttonText }) => {
           className="modal__form-input"
           type="text"
           minLength="1"
+          maxLength="30"
           name="petID"
           placeholder="Pet ID"
           value={data.petID}

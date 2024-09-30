@@ -1,11 +1,13 @@
-# Notes
-
-Apparently, students and reviewers have different versions of the documentation regarding project deployment. I contacted the manager, and they are now working on correcting the issue. Anyway, I have deployed the frontend part.
-
 # Adopt a Pet - frontend
 
-A web application that helps people pick a pet from a shelter.
+A web application that helps people find and adopt pets from shelters.
 
-Shelters can register to provide information about their animals, and potential pet parents can search according to their preferences. Results will be shown starting with the closest available shelter.
+Shelters can register and provide detailed information about their animals, while potential pet parents can search based on their preferences. Search results are displayed starting with pets from the closest available shelter.
 
-homepage: https://adoptapet.soon.it
+## Technologies
+
+## Links
+
+[Live Website](https://adoptapet.soon.it/) \
+[API](https://api.adoptapet.soon.it/) \
+[Backend Repository](https://github.com/AnnaIndyukova/adopt-a-pet-backend)

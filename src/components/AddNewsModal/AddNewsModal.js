@@ -35,6 +35,7 @@ const AddNewsModal = ({ handleAddNewsSubmit, onCloseModal, buttonText }) => {
       title="Create a news article"
       onSubmit={handleSubmit}
       buttonText={buttonText}
+      isValid="true"
     >
       <div className="modal__form-inputs">
         <input

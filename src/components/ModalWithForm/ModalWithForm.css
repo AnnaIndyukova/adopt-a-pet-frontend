@@ -18,7 +18,7 @@
   line-height: 20px;
   background-color: #fff;
   width: 400px;
-  padding: 40px;
+  padding: 35px;
   position: relative;
 }
 
@@ -55,7 +55,7 @@
 }
 
 .modal__form-input {
-  height: 60px;
+  height: 50px;
   border-style: solid;
   border-width: 1px;
   border-color: #cfcfcf;
@@ -63,7 +63,7 @@
   background-color: transparent;
   padding-left: 24px;
   padding-right: 24px;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .modal__form-textarea {
@@ -71,7 +71,7 @@
 }
 
 .modal__form-radio-header {
-  margin-top: 25px;
+  margin-top: 15px;
   margin-bottom: 5px;
 }
 
@@ -89,26 +89,35 @@
 }
 
 .modal__submit-addOn {
-  margin-top: 15px;
   display: flex;
   align-items: center;
   gap: 20px;
+}
+.modal__submit-addOn-text {
+  margin-top: 15px;
 }
 
 .modal__submit-button {
   border-style: none;
   width: 129px;
-  height: 60px;
+  height: 50px;
   border-radius: 30px;
   background-color: #8cace5;
   color: #fff;
   font-weight: 500;
   transition: ease-in 0.3s;
   cursor: pointer;
+  margin-top: 15px;
 }
 
 .modal__submit-button:hover {
   background-color: #2f71e5;
+}
+
+.modal__submit-button:disabled {
+  background-color: rgba(230, 230, 230, 1);
+  color: rgba(190, 190, 190, 1);
+  cursor: not-allowed;
 }
 
 .modal__button-text {
@@ -131,8 +140,8 @@
 .modal__form-error-text {
   color: #e52f2f;
   align-self: flex-start;
-  margin: 8px 0 0;
-  height: 20px;
+  height: 25px;
+  font-size: 14px;
 }
 
 .modal__form-city-options {
@@ -151,6 +160,7 @@
 
 .modal__form-city-option-warning {
   color: #e52f2f;
+  font-size: 14px;
 }
 
 .modal__form-textarea {

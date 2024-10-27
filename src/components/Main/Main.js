@@ -18,10 +18,7 @@ function Main({ handleCardClick, handleCardLike, cards }) {
       ...item,
       distance: isLoggedIn
         ? Math.round(
-            geolib.getDistance(
-              currentUser.coordinates,
-              JSON.parse(item.coordinates)
-            ) / 1000
+            geolib.getDistance(currentUser.coordinates, item.coordinates) / 1000
           )
         : null,
     };

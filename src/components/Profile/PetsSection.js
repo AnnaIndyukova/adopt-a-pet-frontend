@@ -14,16 +14,14 @@ const PetsSection = ({ cards, handleCardClick, handleCardLike }) => {
   if (isLoggedIn && currentUser.userType === "shelter") {
     captionText = "Animals in your shelter";
     filteredItems = cards?.filter((card) => {
-      // return card.ownerID === currentUser._id;
-      return card.ownerID === "1"; // temporary
+      return card.owner === currentUser._id;
     });
   }
   //else - return  cards liked by this user
   if (isLoggedIn && currentUser.userType === "petParent") {
     captionText = "Animals you liked";
     filteredItems = cards?.filter((card) => {
-      //return card.likes.some((id) => id === currentUser._id);
-      return card.likes.some((id) => id === "45"); // temporary
+      return card.likes.some((id) => id === currentUser._id);
     });
   }
 
@@ -32,10 +30,7 @@ const PetsSection = ({ cards, handleCardClick, handleCardLike }) => {
       ...item,
       distance: isLoggedIn
         ? Math.round(
-            geolib.getDistance(
-              currentUser.coordinates,
-              JSON.parse(item.coordinates)
-            ) / 1000
+            geolib.getDistance(currentUser.coordinates, item.coordinates) / 1000
           )
         : null,
     };

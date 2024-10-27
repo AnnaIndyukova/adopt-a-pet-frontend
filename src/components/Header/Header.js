@@ -6,7 +6,7 @@ import closeButton from "../../images/closeButtonGray.svg";
 import { AppContext } from "../../contexts/AppContext";
 import { Link } from "react-router-dom";
 
-const Header = ({ handleSignUpButton, handleSearchButton }) => {
+const Header = ({ handleSignUpButton, handleSearchButton, getPetsList }) => {
   const { isLoggedIn } = useContext(AppContext);
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
 
@@ -18,6 +18,11 @@ const Header = ({ handleSignUpButton, handleSearchButton }) => {
     if (isMobileMenuOpened) {
       toggleMobileMenu();
     }
+  };
+
+  const onClickTab = () => {
+    getPetsList();
+    closeMobileMenu();
   };
 
   const mobileMenuHandler = () => {
@@ -66,7 +71,7 @@ const Header = ({ handleSignUpButton, handleSearchButton }) => {
           className="header__link"
           style={{ textDecoration: "none" }}
         >
-          <p className="header__tab" onClick={closeMobileMenu}>
+          <p className="header__tab" onClick={onClickTab}>
             News
           </p>
         </Link>
@@ -77,7 +82,7 @@ const Header = ({ handleSignUpButton, handleSearchButton }) => {
             className="header__link"
             style={{ textDecoration: "none" }}
           >
-            <p className="header__tab" onClick={closeMobileMenu}>
+            <p className="header__tab" onClick={onClickTab}>
               My profile
             </p>
           </Link>

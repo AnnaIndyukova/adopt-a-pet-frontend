@@ -8,7 +8,7 @@ const SearchModal = ({
   handleClearSearch,
 }) => {
   const [data, setData] = useState({
-    animalType: "Dog",
+    animalType: "dog",
     petAge: "",
   });
 
@@ -31,6 +31,7 @@ const SearchModal = ({
       title="Find a Friend"
       onSubmit={handleSubmit}
       buttonText={buttonText}
+      isValid="true"
       addOn=<button
         className="modal__button-text"
         type="text"
@@ -49,10 +50,10 @@ const SearchModal = ({
           placeholder="Type of animal"
           value={data.animalType}
         >
-          <option value="Dog">Dog</option>
-          <option value="Cat">Cat</option>
-          <option value="Bird">Bird</option>
-          <option value="Other">Other</option>
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+          <option value="bird">Bird</option>
+          <option value="other">Other</option>
         </select>
 
         <select
@@ -64,9 +65,9 @@ const SearchModal = ({
           value={data.petAge}
         >
           <option value="">Age doesn't matter</option>
-          <option value="Junior">Junior</option>
-          <option value="Adult">Adult</option>
-          <option value="Senior">Senior</option>
+          <option value="junior">Junior</option>
+          <option value="adult">Adult</option>
+          <option value="senior">Senior</option>
         </select>
       </div>
     </ModalWithForm>

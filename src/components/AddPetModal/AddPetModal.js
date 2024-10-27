@@ -1,24 +1,31 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const AddPetModal = ({ handleAddPetSubmit, onCloseModal, buttonText }) => {
   const { currentUser } = useContext(CurrentUserContext);
+  const [error, setError] = useState("");
   const [data, setData] = useState({
-    petID: "",
-    animalType: "",
-    petAge: "",
+    petNameID: "",
+    animalType: "dog",
+    petAge: "junior",
     petDescription: "",
     petStatus: "available",
     imageUrl: "",
-    // ownerID: currentUser._id,
-    ownerID: "1", //temporary
+    ownerID: currentUser._id,
     shelter: currentUser.name,
     city: currentUser.city,
-    coordinates: JSON.stringify(currentUser.coordinates), //temporary
+    coordinates: currentUser.coordinates,
     shelterEmail: currentUser.email,
     likes: [],
   });
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = data.imageUrl;
+    image.onload = () => setError("");
+    image.onerror = () => setError("Enter a valid image URL");
+  }, [data.imageUrl]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +37,9 @@ const AddPetModal = ({ handleAddPetSubmit, onCloseModal, buttonText }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAddPetSubmit(data);
+    if (!error) {
+      handleAddPetSubmit(data);
+    }
   };
 
   return (
@@ -39,6 +48,7 @@ const AddPetModal = ({ handleAddPetSubmit, onCloseModal, buttonText }) => {
       title="New pet: fill the information"
       onSubmit={handleSubmit}
       buttonText={buttonText}
+      isValid="true"
     >
       <div className="modal__form-inputs">
         <input
@@ -46,17 +56,17 @@ const AddPetModal = ({ handleAddPetSubmit, onCloseModal, buttonText }) => {
           type="text"
           minLength="1"
           maxLength="30"
-          name="petID"
+          name="petNameID"
           placeholder="Pet ID"
-          value={data.petID}
+          value={data.petNameID}
           onChange={handleChange}
           required
         />
 
         <select
           className="modal__form-input"
-          id="animal-type"
-          name="animal-type"
+          id="animalType"
+          name="animalType"
           onChange={handleChange}
           placeholder="Type of animal"
           value={data.animalType}
@@ -100,6 +110,7 @@ const AddPetModal = ({ handleAddPetSubmit, onCloseModal, buttonText }) => {
           required
         />
       </div>
+      {<p className="modal__form-error-text">{error}</p>}
     </ModalWithForm>
   );
 };

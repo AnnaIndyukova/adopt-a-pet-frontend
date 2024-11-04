@@ -36,8 +36,8 @@ function Main({ handleCardClick, handleCardLike, cards }) {
           animals.
         </p>
       </div>
-      <section className="card__section" id="card-section">
-        <div className="card__items">
+      <section className="main__cards-section" id="card-section">
+        <div className="main__cards-items">
           {filteredItemsDistance.map((item) => (
             <PetCard
               item={item}

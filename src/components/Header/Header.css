@@ -11,12 +11,14 @@
   border-bottom: #b6bcbf 2px solid;
 }
 
-.header__logo_link {
+.header__link {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
+
 .header__logo {
+  border-radius: 20px;
   transition: transform 0.3s ease;
 }
 .header__logo:hover {

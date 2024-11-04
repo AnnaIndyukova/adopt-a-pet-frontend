@@ -15,7 +15,7 @@
   margin: 1px auto;
 }
 
-.card__items {
+.main__cards-items {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;

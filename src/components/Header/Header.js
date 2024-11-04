@@ -44,8 +44,8 @@ const Header = ({ handleSignUpButton, handleSearchButton, getPetsList }) => {
       className={`header ${isMobileMenuOpened ? "header__mobile-opened" : ""}`}
     >
       <div className="header__logo">
-        <Link className="header__logo_link" to="/">
-          <img className="header__logo_img" src={logoSrc} alt="logo" />
+        <Link className="header__link" to="/">
+          <img className="header__image" src={logoSrc} alt="logo" />
         </Link>
       </div>
 

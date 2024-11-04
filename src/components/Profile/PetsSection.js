@@ -40,7 +40,7 @@ const PetsSection = ({ cards, handleCardClick, handleCardLike }) => {
   return (
     <section className="petsSection__section" id="petsSection-section">
       <div className="petsSection__caption">
-        <p className="petsSection__title">{captionText}</p>
+        <h1 className="petsSection__title">{captionText}</h1>
       </div>
 
       <div className="petsSection__items">

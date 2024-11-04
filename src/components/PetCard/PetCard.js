@@ -50,7 +50,7 @@ const PetCard = ({ item, handleCardClick, handleCardLike }) => {
         alt={item.name}
         onClick={() => handleCardClick(item)}
       />
-      <div className="card__city_wrapper">
+      <div className="card__city-wrapper">
         <p className="card__city">
           {" "}
           {item.city.split(",")[0]}

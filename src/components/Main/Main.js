@@ -29,7 +29,7 @@ function Main({ handleCardClick, handleCardLike, cards }) {
     <main className="main">
       <div className="main__greeting">
         <p className="main__greeting-p">
-          You can adopt one of them! Sign up to discover all the possibilities.
+          You can adopt one of them! Sign up to find pets available near you.
         </p>
         <p className="main__greeting-p">
           If you work at a shelter, sign up to share information about your

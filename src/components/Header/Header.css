@@ -18,12 +18,21 @@
 }
 
 .header__logo {
-  border-radius: 20px;
+  border-radius: 50px;
   transition: transform 0.3s ease;
 }
 .header__logo:hover {
   transform: scale(1.1);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.header__image {
+  padding-top: 3px;
+  padding-left: 2px;
+  padding-right: 2px;
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
 }
 
 .header__button {

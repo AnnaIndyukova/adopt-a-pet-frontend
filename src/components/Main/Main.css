@@ -6,7 +6,8 @@
   display: flex;
   flex-direction: column;
   font-weight: 400;
-  font-family: "Inter-Regular";
+  font-family: "Inter-Regular", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 18px;
   gap: 0px;
 }

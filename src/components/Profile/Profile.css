@@ -8,7 +8,8 @@
 .sideBar {
   display: flex;
   flex-direction: column;
-  font-family: "Inter-Medium";
+  font-family: "Inter-Medium", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -17,7 +18,8 @@
 }
 
 .sideBar__name {
-  font-family: "Inter-Bold";
+  font-family: "Inter-Bold", -apple-system, BlinkMacSystemFont, "Segoe UI Bold",
+    Roboto, "Helvetica Neue Bold", Arial, sans-serif;
   font-size: 20px;
 }
 
@@ -34,7 +36,8 @@
 }
 
 .petsSection__title {
-  font-family: "Inter-Medium";
+  font-family: "Inter-Medium", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;

@@ -1,14 +1,15 @@
-# Adopt a Pet - frontend
+# Adopt a Pet
 
 A web application that helps people find and adopt pets from shelters.
 
-Shelters can register and provide detailed information about their animals, while potential pet parents can search based on their preferences. Search results are displayed starting with pets from the closest available shelter.
+Shelters can register on the platform to showcase their animals with detailed profiles, while potential adopters can easily browse pets based on their location and personal preferences. The search feature prioritizes pets from the closest shelters to the user (location feature requires sign-in).
 
-## Built with
+## Key Technologies and Features
 
-- React.js
-- Geocoding API for converting adresses to coordinates
+- React.js for interactive and dynamic UI
+- Geocoding API to convert addresses into coordinates for proximity-based search
 - Custom hooks, global context and state management
+- Responsive design using media queries to ensure compatibility with various screen sizes
 
 ## Links
 

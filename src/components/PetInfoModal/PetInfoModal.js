@@ -11,8 +11,7 @@ const PetInfoModal = ({
 }) => {
   const { currentUser } = useContext(CurrentUserContext);
   const { isLoggedIn } = useContext(AppContext);
-  // const isOwn = isLoggedIn && selectedCard.ownerID === currentUser._id;
-  const isOwn = currentUser.userType === "shelter"; // temporary
+  const isOwn = isLoggedIn && selectedCard.owner === currentUser._id;
 
   const petDeleteButtonClassName = `modal__pet_delete-button ${
     isOwn
@@ -46,14 +45,14 @@ const PetInfoModal = ({
         <img
           className="modal__pet-image"
           src={selectedCard.imageUrl}
-          alt={selectedCard.petID}
+          alt={selectedCard.petNameID}
         />
         <div className="modal__city_wrapper">
           <p className="modal__city"> {selectedCard.city.split(",")[0]}</p>
         </div>
         <div className="modal__pet-info-wrapper">
           <div className="modal__pet-info">
-            <p>Pet ID: {selectedCard.petID}</p>
+            <p>Pet ID: {selectedCard.petNameID}</p>
             <p> Age: {selectedCard.petAge}</p>
             <p> {selectedCard.petDescription}</p>
             <p title={selectedCard.shelterEmail}>

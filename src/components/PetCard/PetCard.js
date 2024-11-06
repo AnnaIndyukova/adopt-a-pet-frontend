@@ -7,8 +7,7 @@ const PetCard = ({ item, handleCardClick, handleCardLike }) => {
   const { isLoggedIn } = useContext(AppContext);
   const { currentUser } = useContext(CurrentUserContext);
   const [isLiked, setIsLiked] = useState(
-    // currentUser && item.likes.some((id) => id === currentUser._id)  // temporary
-    false
+    currentUser && item.likes.some((id) => id === currentUser._id)
   );
 
   const cardLikeButtonClass = `card__like-button ${
@@ -51,7 +50,7 @@ const PetCard = ({ item, handleCardClick, handleCardLike }) => {
         alt={item.name}
         onClick={() => handleCardClick(item)}
       />
-      <div className="card__city_wrapper">
+      <div className="card__city-wrapper">
         <p className="card__city">
           {" "}
           {item.city.split(",")[0]}

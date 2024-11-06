@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CityInput from "../CityInput/CityInput";
+import { useFormValidation } from "../UseFormValidation/UseFormValidation";
 
 const RegisterModal = ({
   handleRegisterSubmit,
@@ -8,52 +9,37 @@ const RegisterModal = ({
   onCloseModal,
   buttonText,
 }) => {
-  const [error, setError] = useState("");
-  const [data, setData] = useState({
-    userType: "",
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    city: "",
-    coordinates: null,
-  });
+  const { values, setValues, handleChange, errors, isValid, resetForm } =
+    useFormValidation();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const [errorPasswords, setErrorPasswords] = useState("");
 
   const handleCityChange = (city) => {
-    setData((prevData) => ({
-      ...prevData,
+    setValues((values) => ({
+      ...values,
       city: city,
     }));
   };
 
   const handleCoordinatesChange = (coordinates) => {
-    setData((prevData) => ({
-      ...prevData,
+    setValues((values) => ({
+      ...values,
       coordinates: coordinates,
     }));
   };
 
   useEffect(() => {
-    if (data.password !== data.confirmPassword) {
-      setError("Passwords do not match");
+    if (values.password !== values.confirmPassword) {
+      setErrorPasswords("Passwords do not match");
     } else {
-      setError("");
+      setErrorPasswords("");
     }
-  }, [data]);
+  }, [values.password, values.confirmPassword]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!error) {
-      handleRegisterSubmit(data);
-    }
+    handleRegisterSubmit(values);
+    resetForm();
   };
 
   return (
@@ -63,8 +49,9 @@ const RegisterModal = ({
       title="Sign Up"
       onSubmit={handleSubmit}
       buttonText={buttonText}
+      isValid={isValid && !errorPasswords}
       addOn=<button
-        className="modal__button-text modal__button-text-invisible"
+        className="modal__button-text"
         type="text"
         onClick={onLogin}
       >
@@ -113,8 +100,10 @@ const RegisterModal = ({
           maxLength={30}
           name="name"
           placeholder="Username"
-          value={data.name}
+          title={errors.name}
+          value={values.name || ""}
           onChange={handleChange}
+          required
         />
 
         <input
@@ -123,7 +112,8 @@ const RegisterModal = ({
           name="email"
           id="email"
           placeholder="Email"
-          value={data.email}
+          title={errors.email}
+          value={values.email || ""}
           onChange={handleChange}
           required
         />
@@ -131,6 +121,7 @@ const RegisterModal = ({
           onCityChange={handleCityChange}
           onCoordinatesChange={handleCoordinatesChange}
           currentCityValue=""
+          required
         />
         <input
           className="modal__form-input"
@@ -139,8 +130,10 @@ const RegisterModal = ({
           maxLength={30}
           name="password"
           placeholder="Password"
-          value={data.password}
+          title={errors.password}
+          value={values.password || ""}
           onChange={handleChange}
+          required
         />
 
         <input
@@ -150,11 +143,13 @@ const RegisterModal = ({
           maxLength={30}
           name="confirmPassword"
           placeholder="Password again"
-          value={data.confirmPassword}
+          title={errors.confirmPassword}
+          value={values.confirmPassword || ""}
           onChange={handleChange}
+          required
         />
       </div>
-      {<p className="modal__form-error-text">{error}</p>}
+      {<span className="modal__form-error-text">{errorPasswords}</span>}
     </ModalWithForm>
   );
 };

@@ -8,6 +8,7 @@ const EditPetStatusModal = ({
   buttonText,
 }) => {
   const [data, setData] = useState({
+    id: `${selectedCard._id}`,
     petStatus: `${selectedCard.petStatus}`,
   });
 
@@ -30,6 +31,7 @@ const EditPetStatusModal = ({
       title="Change the pet's status"
       onSubmit={handleSubmit}
       buttonText={buttonText}
+      isValid="true"
     >
       <img
         className="modal__image"

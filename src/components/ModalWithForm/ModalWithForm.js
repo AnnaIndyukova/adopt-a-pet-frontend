@@ -8,6 +8,7 @@ const ModalWithForm = ({
   buttonText,
   onSubmit,
   onClose,
+  isValid,
   addOn = "",
 }) => {
   useEffect(() => {
@@ -38,7 +39,11 @@ const ModalWithForm = ({
           <p className="modal__title">{title}</p>
           {children}
           <div className="modal__submit-addOn">
-            <button className="modal__submit-button" type="submit">
+            <button
+              className="modal__submit-button"
+              type="submit"
+              disabled={!isValid}
+            >
               {buttonText}
             </button>
             <div className="modal__submit-addOn-text">{addOn}</div>

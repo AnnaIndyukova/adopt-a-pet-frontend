@@ -1,18 +1,71 @@
 import { BASE_URL } from "./constants";
 
 const handleResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  if (res.ok) {
+    return res.json();
+  }
+  return res.json().then((err) => {
+    return Promise.reject({ status: res.status, message: err.message });
+  });
 };
 
 const request = (url, options) => {
   return fetch(url, options).then(handleResponse);
 };
 
-const getPetsList = () => {};
+const getPetsList = () => {
+  return request(`${BASE_URL}/pets`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
 
-const addPet = () => {};
+const addPet = ({
+  petNameID,
+  animalType,
+  petAge,
+  petDescription,
+  petStatus,
+  imageUrl,
+  shelter,
+  city,
+  coordinates,
+  shelterEmail,
+}) => {
+  const jwt = localStorage.getItem("jwt");
+  return request(`${BASE_URL}/pets`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${jwt}`,
+    },
+    body: JSON.stringify({
+      petNameID,
+      animalType,
+      petAge,
+      petDescription,
+      petStatus,
+      imageUrl,
+      shelter,
+      city,
+      coordinates,
+      shelterEmail,
+    }),
+  });
+};
 
-const updatePetStatus = () => {};
+const updatePetStatus = ({ id, petStatus }) => {
+  const jwt = localStorage.getItem("jwt");
+  return api.request(`${BASE_URL}/pets/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${jwt}`,
+    },
+    body: JSON.stringify({ petStatus }),
+  });
+};
 
 const addCardLike = (id) => {
   const jwt = localStorage.getItem("jwt");
@@ -36,9 +89,46 @@ const removeCardLike = (id) => {
   });
 };
 
-const deleteCard = (id) => {};
+const deleteCard = (_id) => {
+  const jwt = localStorage.getItem("jwt");
+  return request(`${BASE_URL}/pets/${_id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${jwt}`,
+    },
+  });
+};
 
-const addNews = () => {};
+const addNews = ({
+  articleDate,
+  articleCaption,
+  articleText,
+  articleAuthor,
+}) => {
+  const jwt = localStorage.getItem("jwt");
+  return request(`${BASE_URL}/news`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${jwt}`,
+    },
+    body: JSON.stringify({
+      articleDate,
+      articleCaption,
+      articleText,
+      articleAuthor,
+    }),
+  });
+};
+
+const getNewsList = () => {
+  return request(`${BASE_URL}/news`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
 
 const api = {
   request,
@@ -48,6 +138,7 @@ const api = {
   removeCardLike,
   deleteCard,
   addNews,
+  getNewsList,
   getPetsList,
   updatePetStatus,
 };

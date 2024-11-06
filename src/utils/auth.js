@@ -3,7 +3,7 @@ import { BASE_URL } from "./constants";
 
 // Sign Up
 const register = ({ userType, name, email, password, city, coordinates }) => {
-  /*  return api.request(`${BASE_URL}/signup`, {
+  return api.request(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,7 +16,7 @@ const register = ({ userType, name, email, password, city, coordinates }) => {
       city,
       coordinates,
     }),
-  }); */
+  });
 };
 
 // Sign In

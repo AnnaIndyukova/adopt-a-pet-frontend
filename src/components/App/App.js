@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import {
+  Switch,
+  Route,
+  useLocation,
+  useHistory,
+  Redirect,
+} from "react-router-dom";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -7,6 +13,7 @@ import News from "../News/News";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import RegisterCompleteModal from "../RegisterCompleteModal/RegisterCompleteModal";
 import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import AddPetModal from "../AddPetModal/AddPetModal";
@@ -20,8 +27,6 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import api from "../../utils/api";
 import auth from "../../utils/auth";
-import { defaultPetCards } from "../../utils/constants";
-import { defaultNewsArticles } from "../../utils/constants";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -29,12 +34,15 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [petCards, setPetCards] = useState(defaultPetCards);
-  const [newsArticles, setNewsArticles] = useState(defaultNewsArticles);
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
+  const [formError, setFormError] = useState("");
+  const [petCards, setPetCards] = useState([]);
+  const [newsArticles, setNewsArticles] = useState([]);
+  const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
-    // for future use - authorization
-    /*    const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");
     if (token) {
       auth
         .checkToken(token)
@@ -42,14 +50,43 @@ function App() {
           setIsLoggedIn(true);
           setCurrentUser(res);
         })
-        .catch(console.error);
-    } */
+        .catch(console.error)
+        .finally(() => setIsAuthChecked(true));
+    } else {
+      setIsAuthChecked(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (location.state?.showRegisterModal) {
+      setActiveModal("register");
+    }
+  }, [location]);
+
+  const getPetsList = () => {
+    api
+      .getPetsList()
+      .then((res) => {
+        setPetCards(res);
+      })
+      .catch(console.error);
+  };
+
+  useEffect(() => {
+    getPetsList();
+  }, []);
+
+  useEffect(() => {
+    api
+      .getNewsList()
+      .then((res) => {
+        setNewsArticles(res.reverse());
+      })
+      .catch(console.error);
   }, []);
 
   const handleLoginSubmit = ({ email, password }) => {
-    handleCloseModal();
-    /* for future use
-    /* const userData = { email, password };
+    const userData = { email, password };
     setIsLoading(true);
     auth
       .login(userData)
@@ -63,10 +100,12 @@ function App() {
           });
         }
       })
-      .catch(console.error)
+      .catch((error) => {
+        setFormError(error.message);
+      })
       .finally(() => {
         setIsLoading(false);
-      }); */
+      });
   };
 
   const handleRegisterSubmit = ({
@@ -78,29 +117,22 @@ function App() {
     coordinates,
   }) => {
     const userData = { userType, name, email, password, city, coordinates };
-    setCurrentUser(userData);
-    setIsLoggedIn(true);
-    handleCloseModal();
-    /* for future use
-    /* setIsLoading(true);
+    setIsLoading(true);
     auth
       .register(userData)
       .then((res) => {
-        handleLoginSubmit({ email, password });
         handleCloseModal();
+        openRegisterCompleteModal();
       })
       .catch(console.error)
       .finally(() => {
         setIsLoading(false);
-      }); */
+      });
   };
 
   const handleChangeProfileSubmit = ({ name, city, coordinates }) => {
     const userData = { name, city, coordinates };
-    setCurrentUser(userData);
-    handleCloseModal();
-    /* for future use
-    /*  setIsLoading(true);
+    setIsLoading(true);
     auth
       .updateUser(userData)
       .then((res) => {
@@ -110,7 +142,7 @@ function App() {
       .catch(console.error)
       .finally(() => {
         setIsLoading(false);
-      }); */
+      });
   };
 
   const handleLogout = (e) => {
@@ -118,10 +150,11 @@ function App() {
     setIsLoggedIn(false);
     localStorage.removeItem("jwt");
     setCurrentUser({});
+    history.push("/");
   };
 
   const handleAddPetSubmit = ({
-    petID,
+    petNameID,
     animalType,
     petAge,
     petDescription,
@@ -131,10 +164,9 @@ function App() {
     city,
     coordinates,
     shelterEmail,
-    likes,
   }) => {
     const pet = {
-      petID,
+      petNameID,
       animalType,
       petAge,
       petDescription,
@@ -144,13 +176,8 @@ function App() {
       city,
       coordinates,
       shelterEmail,
-      likes,
-      _id: Math.floor(Math.random() * 100), //temporary
     };
-    setPetCards([pet, ...petCards]);
-    handleCloseModal();
-    /* for future use
-    /*setIsLoading(true);
+    setIsLoading(true);
     api
       .addPet(pet)
       .then((pet) => {
@@ -160,23 +187,24 @@ function App() {
       .catch(console.error)
       .finally(() => {
         setIsLoading(false);
-      }); */
+      });
   };
 
-  const handleEditPetStatusSubmit = ({ _id, status }) => {
-    const petData = { _id, status };
-    handleCloseModal();
-    /* for future use
-    /*  setIsLoading(true);
+  const handleEditPetStatusSubmit = ({ id, petStatus }) => {
+    const petData = { id, petStatus };
+    setIsLoading(true);
     api
       .updatePetStatus(petData)
-      .then((res) => {
+      .then((updatedCard) => {
+        setPetCards((petCards) => {
+          return petCards.map((c) => (c._id === id ? updatedCard.data : c));
+        });
         handleCloseModal();
       })
       .catch(console.error)
       .finally(() => {
         setIsLoading(false);
-      }); */
+      });
   };
 
   const handleAddNewsSubmit = ({
@@ -190,12 +218,7 @@ function App() {
       articleCaption,
       articleText,
       articleAuthor,
-      _id: Math.floor(Math.random() * 100), //temporary
     };
-    setNewsArticles([article, ...newsArticles]);
-    handleCloseModal();
-    /* for future use
-    /*
     setIsLoading(true);
     api
       .addNews(article)
@@ -206,30 +229,38 @@ function App() {
       .catch(console.error)
       .finally(() => {
         setIsLoading(false);
-      }); */
+      });
   };
 
   const handleFindPetSubmit = ({ animalType, petAge }) => {
-    setPetCards(defaultPetCards);
-    const newPetList = defaultPetCards.filter((item) => {
-      return (
-        (!animalType || item.animalType === animalType) &&
-        (!petAge || item.petAge === petAge)
-      );
-    });
-    setPetCards(newPetList);
-    handleCloseModal();
+    api
+      .getPetsList()
+      .then((res) => {
+        const newPetList = res.filter((item) => {
+          return (
+            (!animalType || item.animalType === animalType) &&
+            (!petAge || item.petAge === petAge)
+          );
+        });
+        return newPetList;
+      })
+      .then((newPetList) => {
+        setPetCards(newPetList);
+      })
+      .catch(console.error)
+      .finally(() => {
+        handleCloseModal();
+      });
   };
 
   const handleClearSearch = () => {
-    setPetCards(defaultPetCards);
+    getPetsList();
     handleCloseModal();
   };
 
   const handleCardLike = ({ id, isLiked, setIsLiked }) => {
     setIsLiked(!isLiked);
-    /* for future use
-    /*  isLiked
+    isLiked
       ? api
           .removeCardLike(id)
           .then((updatedCard) => {
@@ -245,17 +276,11 @@ function App() {
               return petCards.map((c) => (c._id === id ? updatedCard : c));
             });
           })
-          .catch(console.error); */
+          .catch(console.error);
   };
 
   const handleDeleteCard = () => {
-    const newPetList = petCards.filter((item) => {
-      return item._id !== selectedCard._id;
-    });
-    setPetCards(newPetList);
-    handleCloseModal();
-    /* for future use
-    /* api
+    api
       .deleteCard(selectedCard._id)
       .then(() => {
         const newPetList = petCards.filter((item) => {
@@ -264,7 +289,7 @@ function App() {
         setPetCards(newPetList);
         handleCloseModal();
       })
-      .catch(console.error); */
+      .catch(console.error);
   };
 
   //  Modal windows
@@ -273,6 +298,9 @@ function App() {
   };
   const handleSignUpButton = () => {
     setActiveModal("register");
+  };
+  const openRegisterCompleteModal = () => {
+    setActiveModal("registerComplete");
   };
   const handleEditProfileButton = () => {
     setActiveModal("editProfile");
@@ -297,15 +325,22 @@ function App() {
     setActiveModal("");
   };
 
+  if (!isAuthChecked) {
+    return <Preloader />; // Show a loader while checking token
+  }
+
   return (
     <div className="app">
-      <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      <AppContext.Provider
+        value={{ isLoggedIn, setIsLoggedIn, formError, setFormError }}
+      >
         <CurrentUserContext.Provider value={{ currentUser }}>
           <div className="app__container">
             <div className="app__content">
               <Header
                 handleSignUpButton={handleSignUpButton}
                 handleSearchButton={handleSearchButton}
+                getPetsList={getPetsList}
               />
               <Switch>
                 <Route exact path="/">
@@ -318,9 +353,9 @@ function App() {
                 <Route path="/news">
                   <News articles={newsArticles} />
                 </Route>
-                <ProtectedRoute path="/profile">
+                <ProtectedRoute exact path="/profile">
                   <Profile
-                    cards={defaultPetCards}
+                    cards={petCards}
                     handleCardClick={handleCardClick}
                     handleCardLike={handleCardLike}
                     onLogout={handleLogout}
@@ -329,6 +364,14 @@ function App() {
                     handleEditProfileButton={handleEditProfileButton}
                   />
                 </ProtectedRoute>
+                <Route path="*">
+                  <Redirect
+                    to={{
+                      pathname: "/",
+                      state: { showRegisterModal: false, from: location },
+                    }}
+                  />
+                </Route>
               </Switch>
             </div>
             <Footer />
@@ -341,6 +384,13 @@ function App() {
               onLogin={handleLogInButton}
               onCloseModal={handleCloseModal}
               buttonText="Sign Up"
+            />
+          )}
+          {activeModal === "registerComplete" && (
+            <RegisterCompleteModal
+              onCloseModal={handleCloseModal}
+              handleSwitchToLogin={handleLogInButton}
+              buttonText="Swith to log in"
             />
           )}
           {activeModal === "login" && (

@@ -10,9 +10,9 @@ const EditProfileModal = ({
 }) => {
   const { currentUser } = useContext(CurrentUserContext);
   const [data, setData] = useState({
-    name: `${currentUser.name}`,
-    city: `${currentUser.city}`,
-    coordinates: `${currentUser.coordinates}`,
+    name: currentUser.name,
+    city: currentUser.city,
+    coordinates: currentUser.coordinates,
   });
 
   const handleChange = (e) => {
@@ -48,6 +48,7 @@ const EditProfileModal = ({
       title="Change profile data"
       onSubmit={handleSubmit}
       buttonText={buttonText}
+      isValid="true"
     >
       <div className="modal__form-inputs">
         <input
